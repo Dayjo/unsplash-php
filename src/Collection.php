@@ -96,12 +96,11 @@ class Collection extends Endpoint
         }
 
         $pageResults['results'] = [];
-        foreach($this->photos["{$page}-{$per_page}"] as $photos2){
-            foreach($photos2 as $photo) {
-                if(is_array($photo)){
-                    $photo = new Photo($photo);
+        foreach ($this->photos["{$page}-{$per_page}"] as $photos2) {
+            foreach ($photos2 as $photo) {
+                if (is_object($photo)) {
+                    $pageResults['results'][] = $photo->getParameters();
                 }
-                $pageResults['results'][] = $photo->getParameters();
             }
         }
         $pageResults['total_pages'] = $arrayObjects->totalPages();
